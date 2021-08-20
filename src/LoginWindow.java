@@ -28,7 +28,6 @@ public class LoginWindow extends JPanel implements ActionListener {
         this.setLayout(null);
         this.setBounds(0,0,500,500);
         this.setBackground(Color.pink);
-        this.setVisible(true);
     }
 
     @Override
