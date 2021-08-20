@@ -9,19 +9,23 @@ public class MyFrame extends JFrame implements ActionListener {
     JLayeredPane layeredPane;
     JPanel contentPane;
     JButton loginPageBtn;
-    LoginWindow loginWindow;
+    JButton registerBtn;
 
     MyFrame(){
         layeredPane = new JLayeredPane();
         contentPane = new JPanel();
         loginPageBtn = new JButton("login");
-        loginWindow = new LoginWindow();
+        registerBtn = new JButton("Sign up");
 
-        loginPageBtn.setBounds(0,0,150, 25);
+        loginPageBtn.setBounds(0,0,200, 25);
         loginPageBtn.addActionListener(this);
+
+        registerBtn.setBounds(0,25,200, 25);
+        registerBtn.addActionListener(this);
 
         layeredPane.setBounds(200,0,500,500);
 
+        contentPane.add(registerBtn);
         contentPane.add(loginPageBtn);
         contentPane.add(layeredPane);
         contentPane.setLayout(null);
@@ -32,6 +36,7 @@ public class MyFrame extends JFrame implements ActionListener {
         this.setVisible(true);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
@@ -39,11 +44,17 @@ public class MyFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginPageBtn){
             layeredPane.removeAll();
-            loginWindow.setLocation(0,0);
-            layeredPane.add(loginWindow);
+            layeredPane.add(new LoginWindow());
             layeredPane.repaint();
             layeredPane.revalidate();
             System.out.println("you're in the login page");
+        }
+        if (e.getSource() == registerBtn){
+            layeredPane.removeAll();
+            layeredPane.add(new RegisterWindow());
+            layeredPane.repaint();
+            layeredPane.revalidate();
+            System.out.println("you're in the register page");
         }
     }
 }
