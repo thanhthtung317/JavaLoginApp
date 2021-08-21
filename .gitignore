@@ -2,3 +2,8 @@ LoginWindow.class
 Main.class
 MyFrame.class
 RegisterWindow.class
+AppController$LoginListener.class
+AppController$SummitListener.class
+AppController.class
+AppModel.class
+DatabaseInfo.class
