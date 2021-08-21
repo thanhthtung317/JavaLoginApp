@@ -19,6 +19,9 @@ public class AppModel {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()){
+                //validate username and password
+                //resultSet.getString(1) is username in data base(login_info)
+                //resultSet.getString(1) is password in data base(login_info)
                 if (userName.equals(resultSet.getString(1)) && password.equals(resultSet.getString(2))){
                     System.out.println("login success");
                 } else {
@@ -33,14 +36,16 @@ public class AppModel {
     }
 
 
-
+    //REGISTER FUNCTION
     public void register(String userName, String password, String firstName, String lastName, String gender, String email, int phoneNumber, String address){
+        //store username and password into login_info
         String addLoginInfoQuery = "INSERT INTO login_info (user_id, user_name, password) " +
                                     "VALUES(" + "'" + userId + "'" +
                                                 "'" + userName + "'" + ","+
                                                 "'" + password + "'" +
                                             ")";
         System.out.println(addLoginInfoQuery);
+        //store user's personal information in user_info
         String addUserQuery = "INSERT INTO user_info (user_id, first_name, last_name, gender, email, phone, address) " +
                               "VALUES(" +   "'" + userId + "'" +
                                             "'" + firstName + "'" +","+
