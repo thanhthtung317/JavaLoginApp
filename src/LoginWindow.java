@@ -1,9 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginWindow extends JPanel implements ActionListener {
+public class LoginWindow extends JPanel{
     JLabel loginLbl;
     JTextField userNameField;
     JPasswordField passwordField;
@@ -21,7 +20,6 @@ public class LoginWindow extends JPanel implements ActionListener {
         passwordField.setBounds(150, 150,200,25);
 
         loginBtn.setBounds(150, 200,200,25);
-        loginBtn.addActionListener(this);
 
         loginLbl.setBounds(100, 0,300,70);
         loginLbl.setForeground(Color.WHITE);
@@ -37,11 +35,15 @@ public class LoginWindow extends JPanel implements ActionListener {
         this.setBounds(0,0,500,500);
         this.setBackground(Color.pink);
     }
+    public void addLoginListener(ActionListener actionListener){
+        loginBtn.addActionListener(actionListener);
+    }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == loginBtn){
-            System.out.println(passwordField.getPassword());
-        }
+    public String getUserName(){
+        return userNameField.getText();
+    }
+
+    public String getPassword(){
+        return String.copyValueOf(passwordField.getPassword());
     }
 }

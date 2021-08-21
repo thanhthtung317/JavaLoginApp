@@ -1,7 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class RegisterWindow extends JPanel {
+public class RegisterWindow extends JPanel implements ActionListener {
     JLabel welcomeLbl;
     JTextField userNameField;
     JTextField passwordField;
@@ -11,7 +13,9 @@ public class RegisterWindow extends JPanel {
     JComboBox genderBox;
     JTextField phoneNumberField;
     JTextField addressField;
+    String gender;
     String[] genderList = {"Male", "Female", "Other"};
+    JButton summitBtn;
 
     RegisterWindow(){
         welcomeLbl = new JLabel("SIGN UP");
@@ -23,6 +27,7 @@ public class RegisterWindow extends JPanel {
         genderBox = new JComboBox(genderList);
         phoneNumberField = new JTextField("Phone number");
         addressField = new JTextField("address");
+        summitBtn = new JButton("Summit");
 
         welcomeLbl.setBounds(100, 0,300,70);
         welcomeLbl.setForeground(Color.WHITE);
@@ -43,8 +48,11 @@ public class RegisterWindow extends JPanel {
 
         genderBox.setBounds(150, 350,200,25);
         genderBox.setSelectedItem("Other");
+        genderBox.addActionListener(this);
 
         addressField.setBounds(150, 400,200,25);
+
+        summitBtn.setBounds(210, 433,80,25);
 
         this.add(welcomeLbl);
         this.add(firstNameField);
@@ -55,9 +63,54 @@ public class RegisterWindow extends JPanel {
         this.add(phoneNumberField);
         this.add(genderBox);
         this.add(addressField);
+        this.add(summitBtn);
 
         this.setLayout(null);
         this.setBackground(new Color(0x123456));
         this.setBounds(0,0,500,500);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == genderBox){
+            gender = (String) genderBox.getSelectedItem();
+        }
+    }
+
+    public void addSummitListener(ActionListener actionListener){
+        summitBtn.addActionListener(actionListener);
+        System.out.println("listening to summit button");
+    }
+
+    public String getUserName() {
+        return userNameField.getText();
+    }
+
+    public String getPassword() {
+        return passwordField.getText();
+    }
+
+    public String getEmail() {
+        return emailField.getText();
+    }
+
+    public String getFirstName() {
+        return firstNameField.getText();
+    }
+
+    public String getLastName() {
+        return lastNameField.getText();
+    }
+
+    public int getPhoneNumber() {
+        return Integer.parseInt(phoneNumberField.getText());
+    }
+
+    public String getAddress() {
+        return addressField.getText();
+    }
+
+    public String getGender() {
+        return gender;
     }
 }
