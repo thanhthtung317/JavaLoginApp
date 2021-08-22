@@ -49,7 +49,7 @@ public class AppModel {
                                             "'" + lastName+ "'" + ","+
                                             "'" + gender + "'" + ","+
                                             "'" + email + "'" + ","+
-                                            "'" + phoneNumber + "'" + ","+
+                                                  phoneNumber  + ","+
                                             "'" + address + "'" +
                                       ")";
         try {
