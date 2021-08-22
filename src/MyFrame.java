@@ -43,15 +43,19 @@ public class MyFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginPageBtn){
+            LoginWindow loginWindow = new LoginWindow();
+            new AppController(new AppModel(), loginWindow, new RegisterWindow());
             layeredPane.removeAll();
-            layeredPane.add(new LoginWindow());
+            layeredPane.add(loginWindow);
             layeredPane.repaint();
             layeredPane.revalidate();
             System.out.println("you're in the login page");
         }
         if (e.getSource() == registerBtn){
+            RegisterWindow registerWindow = new RegisterWindow();
+            new AppController(new AppModel(), new LoginWindow(), registerWindow);
             layeredPane.removeAll();
-            layeredPane.add(new RegisterWindow());
+            layeredPane.add(registerWindow);
             layeredPane.repaint();
             layeredPane.revalidate();
             System.out.println("you're in the register page");

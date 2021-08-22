@@ -38,9 +38,6 @@ public class AppController {
 
             appModel.register(userName, password,firstName,lastName,gender,email,phoneNumber,address);
             System.out.println("register action");
-
-            //increase the user id every time new user added so every user have a unique id
-            AppModel.userId++;
         }
     }
 }

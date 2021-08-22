@@ -1,7 +1,6 @@
 import java.sql.*;
 
 public class AppModel {
-    public static int userId = 0;
 
     public void login(String userName, String password){
         String query = "SELECT user_name," +
@@ -39,16 +38,14 @@ public class AppModel {
     //REGISTER FUNCTION
     public void register(String userName, String password, String firstName, String lastName, String gender, String email, int phoneNumber, String address){
         //store username and password into login_info
-        String addLoginInfoQuery = "INSERT INTO login_info (user_id, user_name, password) " +
-                                    "VALUES(" + "'" + userId + "'" +
-                                                "'" + userName + "'" + ","+
+        String addLoginInfoQuery = "INSERT INTO login_info (user_name, password) " +
+                                    "VALUES(" + "'" + userName + "'" + ","+
                                                 "'" + password + "'" +
                                             ")";
         System.out.println(addLoginInfoQuery);
         //store user's personal information in user_info
-        String addUserQuery = "INSERT INTO user_info (user_id, first_name, last_name, gender, email, phone, address) " +
-                              "VALUES(" +   "'" + userId + "'" +
-                                            "'" + firstName + "'" +","+
+        String addUserQuery = "INSERT INTO user_info (first_name, last_name, gender, email, phone, address) " +
+                              "VALUES(" +   "'" + firstName + "'" +","+
                                             "'" + lastName+ "'" + ","+
                                             "'" + gender + "'" + ","+
                                             "'" + email + "'" + ","+
