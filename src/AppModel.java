@@ -18,7 +18,7 @@ public class AppModel {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
-            while (resultSet.next()){
+            if (resultSet.next()){
                 //validate username and password
                 //resultSet.getString(1) is username in data base(login_info)
                 //resultSet.getString(1) is password in data base(login_info)
@@ -29,6 +29,8 @@ public class AppModel {
                     System.out.println("login fail");
                     JOptionPane.showMessageDialog(null,"Nice try","LOGIN FAIL",JOptionPane.INFORMATION_MESSAGE);
                 }
+            } else{
+                JOptionPane.showMessageDialog(null, "User name have not been created","Username not validate",JOptionPane.INFORMATION_MESSAGE);
             }
             System.out.println("end");
             statement.close();
