@@ -10,12 +10,14 @@ public class MyFrame extends JFrame implements ActionListener {
     JPanel contentPane;
     JButton loginPageBtn;
     JButton registerBtn;
+    ImageIcon icon;
 
     MyFrame(){
         layeredPane = new JLayeredPane();
         contentPane = new JPanel();
         loginPageBtn = new JButton("login");
         registerBtn = new JButton("Sign up");
+        icon = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Documents\\Programming\\Java\\JavaLoginApp\\src\\resources\\login.png");
 
         loginPageBtn.setBounds(0,0,200, 25);
         loginPageBtn.addActionListener(this);
@@ -31,6 +33,7 @@ public class MyFrame extends JFrame implements ActionListener {
         contentPane.setLayout(null);
 
         this.setTitle("Java Login Application");
+        this.setIconImage(icon.getImage());
         this.setContentPane(contentPane);
         this.setDefaultCloseOperation(3);
         this.setVisible(true);
