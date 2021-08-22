@@ -24,8 +24,10 @@ public class AppModel {
                 //resultSet.getString(1) is password in data base(login_info)
                 if (userName.equals(resultSet.getString(1)) && password.equals(resultSet.getString(2))){
                     System.out.println("login success");
+                    JOptionPane.showMessageDialog(null,"You are now authorized to fully access the data","LOGIN SUCCESS",JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     System.out.println("login fail");
+                    JOptionPane.showMessageDialog(null,"Nice try","LOGIN FAIL",JOptionPane.INFORMATION_MESSAGE);
                 }
             }
             System.out.println("end");
@@ -77,9 +79,9 @@ public class AppModel {
     public boolean isAccountExisted(String userName){
         boolean isExist = false;
         String query = "SELECT user_name," +
-                "password " +
-                "FROM login_info " +
-                "WHERE user_name = " + "'" + userName + "'";
+                               "password " +
+                        "FROM login_info " +
+                        "WHERE user_name = " + "'" + userName + "'";
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
