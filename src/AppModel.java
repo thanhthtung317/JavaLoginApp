@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.sql.*;
 
 public class AppModel {
@@ -37,34 +38,64 @@ public class AppModel {
 
     //REGISTER FUNCTION
     public void register(String userName, String password, String firstName, String lastName, String gender, String email, int phoneNumber, String address){
-        //store username and password into login_info
-        String addLoginInfoQuery = "INSERT INTO login_info (user_name, password) " +
-                                    "VALUES(" + "'" + userName + "'" + ","+
-                                                "'" + password + "'" +
-                                            ")";
-        System.out.println(addLoginInfoQuery);
-        //store user's personal information in user_info
-        String addUserQuery = "INSERT INTO user_info (first_name, last_name, gender, email, phone, address) " +
-                              "VALUES(" +   "'" + firstName + "'" +","+
-                                            "'" + lastName+ "'" + ","+
-                                            "'" + gender + "'" + ","+
-                                            "'" + email + "'" + ","+
-                                                  phoneNumber  + ","+
-                                            "'" + address + "'" +
-                                      ")";
-        try {
+        if (isAccountExisted(userName)){
+            JOptionPane.showMessageDialog(null, "Username already existed!","Username not validate",JOptionPane.WARNING_MESSAGE);
+
+        } else {
+            //store username and password into login_info
+            String addLoginInfoQuery = "INSERT INTO login_info (user_name, password) " +
+                    "VALUES(" + "'" + userName + "'" + ","+
+                    "'" + password + "'" +
+                    ")";
+            System.out.println(addLoginInfoQuery);
+            //store user's personal information in user_info
+            String addUserQuery = "INSERT INTO user_info (first_name, last_name, gender, email, phone, address) " +
+                    "VALUES(" +   "'" + firstName + "'" +","+
+                    "'" + lastName+ "'" + ","+
+                    "'" + gender + "'" + ","+
+                    "'" + email + "'" + ","+
+                    phoneNumber  + ","+
+                    "'" + address + "'" +
+                    ")";
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+            try {
+                Connection connection = DriverManager.getConnection(DatabaseInfo.url,DatabaseInfo.userNameDB,DatabaseInfo.passwordDB);
+                Statement statement = connection.createStatement();
+                statement.execute(addLoginInfoQuery);
+                statement.execute(addUserQuery);
+                statement.close();
+            }catch (SQLException ex){
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public boolean isAccountExisted(String userName){
+        boolean isExist = false;
+        String query = "SELECT user_name," +
+                "password " +
+                "FROM login_info " +
+                "WHERE user_name = " + "'" + userName + "'";
+
+        try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-        }catch (Exception ex){
-            ex.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
         }
         try {
-            Connection connection = DriverManager.getConnection(DatabaseInfo.url,DatabaseInfo.userNameDB,DatabaseInfo.passwordDB);
+            Connection connection = DriverManager.getConnection(DatabaseInfo.url, DatabaseInfo.userNameDB, DatabaseInfo.passwordDB);
             Statement statement = connection.createStatement();
-            statement.execute(addLoginInfoQuery);
-            statement.execute(addUserQuery);
-            statement.close();
-        }catch (SQLException ex){
-            ex.printStackTrace();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()){
+                isExist = true;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
         }
+        return isExist;
     }
 }
