@@ -23,9 +23,9 @@ public class RegisterWindow extends JPanel implements ActionListener {
         lastNameField = new JTextField("Last name");
         emailField = new JTextField("Email");
         userNameField = new JTextField("User name");
-        passwordField = new JTextField("Password");
+        passwordField = new JTextField("Password ");
         genderBox = new JComboBox(genderList);
-        phoneNumberField = new JTextField("Phone number");
+        phoneNumberField = new JTextField("Phone number (< 10 number)");
         addressField = new JTextField("address");
         summitBtn = new JButton("Summit");
 
